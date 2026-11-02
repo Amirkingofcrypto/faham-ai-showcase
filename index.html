@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اکوسیستم ربات‌های فهام | Faham AI Bot Ecosystem</title>
+    <meta name="description" content="مرکز مدیریت، معماری و مانیتورینگ ربات‌های هوشمند فهام: ربات کریپتو، ربات گروه، فاطی، بازی دلار و مینی‌اپلیکیشن‌ها">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#05070d',
+                            card: '#0a0e17',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            cyan: '#00f2fe',
+                            emerald: '#10b981',
+                            purple: '#8b5cf6',
+                            rose: '#f43f5e',
+                            amber: '#f59e0b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #03060d;
+            font-family: 'Vazirmatn', sans-serif;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+        }
+        /* Custom Glowing Grid */
+        .cyber-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 25px -5px rgba(0, 242, 254, 0.35);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.35);
+        }
+        .glass-panel {
+            background: rgba(10, 14, 23, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        .glass-panel:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        /* Neon gradient text */
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 50%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .text-gradient-crypto {
+            background: linear-gradient(135deg, #10b981 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Tabular nums */
+        .tabular {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="cyber-grid relative min-h-screen">
+
+    <!-- Ambient Gradient Blobs -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+    <div class="fixed top-1/3 right-10 w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-10 left-1/3 w-80 h-80 bg-emerald-600/10 rounded-full blur-[130px] pointer-events-none -z-10"></div>
+
+    <!-- Live Market & System Ticker Header -->
+    <div class="w-full bg-[#050811]/90 backdrop-blur-md border-b border-white/[0.06] text-xs py-2 px-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <!-- Left: Node Status -->
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 bg-emerald-950/40 border border-emerald-500/20 px-2.5 py-1 rounded-full text-emerald-400 font-medium">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span class="code-font text-[11px]">3HCloud • Miami (US)</span>
+                </div>
+                <div class="hidden md:flex items-center gap-1.5 text-slate-400 text-[11px] code-font">
+                    <span>IP:</span>
+                    <span class="text-slate-200">104.167.199.15</span>
+                    <span class="text-slate-600">|</span>
+                    <span class="text-emerald-400">RTT &lt;14ms</span>
+                </div>
+            </div>
+
+            <!-- Center: Live Crypto Feeds -->
+            <div class="hidden lg:flex items-center gap-6 code-font text-[11px]">
+                <div class="flex items-center gap-1.5">
+                    <span class="text-slate-400 font-bold">BTC/USDT</span>
+                    <span class="text-emerald-400 font-semibold tabular">$88,420</span>
+                    <span class="text-emerald-500 text-[10px] bg-emerald-500/10 px-1 rounded">+3.8%</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-slate-400 font-bold">TON/USDT</span>
+                    <span class="text-cyan-400 font-semibold tabular">$5.34</span>
+                    <span class="text-cyan-500 text-[10px] bg-cyan-500/10 px-1 rounded">+2.1%</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-slate-400 font-bold">ACTIVE DAEMONS</span>
+                    <span class="text-purple-400 font-bold">9 Services</span>
+                </div>
+            </div>
+
+            <!-- Right: Actions -->
+            <div class="flex items-center gap-3">
+                <a href="https://github.com/Amirkingofcrypto/faham-ai-bot" target="_blank" class="flex items-center gap-1.5 bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 px-3 py-1 rounded-lg text-slate-200 text-xs transition duration-150">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <span>سورس گیت‌هاب</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 p-[1px] glow-cyan">
+                <div class="w-full h-full bg-[#070b14] rounded-xl flex items-center justify-center font-black text-cyan-400 text-lg">
+                    ف
+                </div>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold text-white tracking-wide flex items-center gap-2">
+                    اکوسیستم ربات‌های فهام
+                    <span class="text-[10px] font-mono uppercase bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 px-2 py-0.5 rounded-full">v2.5 Enterprise</span>
+                </h1>
+                <p class="text-[11px] text-slate-400">شبکه خودکار ربات‌های تلگرام، ترید و مدیریت هوشمند</p>
+            </div>
+        </div>
+
+        <div class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+            <a href="#bots" class="hover:text-cyan-400 transition">ربات‌ها و پروژه‌ها</a>
+            <a href="#architecture" class="hover:text-cyan-400 transition">معماری سیستم</a>
+            <a href="#terminal" class="hover:text-cyan-400 transition">کنسول و تله‌متری</a>
+            <a href="#database" class="hover:text-cyan-400 transition">پایگاه‌های داده</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 text-center relative">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs text-slate-300 mb-6">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            پشتیبان‌گیری کامل ۱۰۰٪ سرور ابری انجام و روی مخزن امن مستقر گردید
+        </div>
+
+        <h2 class="text-4xl sm:text-6xl font-black text-gradient max-w-4xl mx-auto leading-tight mb-6">
+            زیرساخت هوشمند و ماژولار ربات‌های فهام
+        </h2>
+
+        <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+            مجموعه‌ای یکپارچه از ربات‌های الگوریتمی کریپتو، مدیریت خودکار گروه‌های تلگرام، مینی‌اپ‌های تعاملی تلگرام و دستیارهای هوش مصنوعی تحت پایتون ۳.۱۲ و سرورهای فوق‌سریع.
+        </p>
+
+        <!-- Metrics Row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
+            <div class="glass-panel p-4 rounded-2xl">
+                <div class="text-2xl sm:text-3xl font-black text-cyan-400 code-font tabular">9+</div>
+                <div class="text-xs text-slate-400 mt-1 font-medium">سرویس‌های اختصاصی فعال</div>
+            </div>
+            <div class="glass-panel p-4 rounded-2xl">
+                <div class="text-2xl sm:text-3xl font-black text-emerald-400 code-font tabular">99.98%</div>
+                <div class="text-xs text-slate-400 mt-1 font-medium">آپ‌تایم سرور میامی</div>
+            </div>
+            <div class="glass-panel p-4 rounded-2xl">
+                <div class="text-2xl sm:text-3xl font-black text-purple-400 code-font tabular">1,099</div>
+                <div class="text-xs text-slate-400 mt-1 font-medium">فایل سورس و دیتابیس</div>
+            </div>
+            <div class="glass-panel p-4 rounded-2xl">
+                <div class="text-2xl sm:text-3xl font-black text-amber-400 code-font tabular">&lt;15ms</div>
+                <div class="text-xs text-slate-400 mt-1 font-medium">تاخیر پردازش ایونت‌ها</div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-4">
+            <a href="#bots" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-bold px-6 py-3 rounded-xl transition shadow-lg glow-cyan text-sm flex items-center gap-2">
+                <span>بررسی پروژه‌ها و ربات‌ها</span>
+                <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+            <a href="#terminal" class="glass-panel hover:bg-white/[0.08] text-white px-6 py-3 rounded-xl transition text-sm flex items-center gap-2 code-font">
+                <span>کنسول تله‌متری سرور</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Bots Showcase Section -->
+    <section id="bots" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/[0.06]">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+            <div>
+                <span class="text-xs font-mono uppercase tracking-wider text-cyan-400 bg-cyan-400/10 px-2.5 py-1 rounded-md border border-cyan-400/20">Core Modules</span>
+                <h3 class="text-2xl sm:text-3xl font-black text-white mt-2">ربات‌ها و ماژول‌های فعال فهام</h3>
+                <p class="text-sm text-slate-400 mt-1">مشاهده مشخصات فنی، معماری و عملکرد هر یک از سرویس‌های عملیاتی</p>
+            </div>
+            
+            <!-- Quick Filter Tabs -->
+            <div class="flex items-center gap-2 bg-[#0a0e17] p-1 rounded-xl border border-white/10 text-xs">
+                <button onclick="filterBots('all')" class="tab-btn active px-3 py-1.5 rounded-lg bg-white/10 text-white font-medium transition" data-filter="all">همه</button>
+                <button onclick="filterBots('trading')" class="tab-btn px-3 py-1.5 rounded-lg hover:bg-white/5 text-slate-400 hover:text-white transition" data-filter="trading">معاملاتی / کریپتو</button>
+                <button onclick="filterBots('telegram')" class="tab-btn px-3 py-1.5 rounded-lg hover:bg-white/5 text-slate-400 hover:text-white transition" data-filter="telegram">مدیریت تلگرام</button>
+                <button onclick="filterBots('app')" class="tab-btn px-3 py-1.5 rounded-lg hover:bg-white/5 text-slate-400 hover:text-white transition" data-filter="app">مینی‌اپ و بازی</button>
+            </div>
+        </div>
+
+        <!-- Bot Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="botsContainer">
+            
+            <!-- Card 1: CryptoBot -->
+            <div class="bot-card glass-panel rounded-2xl p-6 transition duration-300 relative group hover:border-cyan-500/40" data-cat="trading">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-black text-xl">
+                        ⚡
+                    </div>
+                    <span class="text-[11px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        cryptobot.service
+                    </span>
+                </div>
+                <h4 class="text-xl font-bold text-white group-hover:text-cyan-400 transition">ربات تریدر کریپتو (CryptoBot)</h4>
+                <p class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
+                    موتور اتوترید و ارائه‌دهنده سیگنال‌های پیشرفته با استراتژی‌های تحلیل تکنیکال (RSI, EMA, Bollinger)، بک‌تستینگ خودکار، ماژول تونل امن و رابط وب‌اپلیکیشن.
+                </p>
+                <div class="mt-4 pt-4 border-t border-white/[0.06] space-y-2 text-xs code-font">
+                    <div class="flex justify-between text-slate-400">
+                        <span>Directory:</span>
+                        <span class="text-slate-200">/root/cryptobot</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Database:</span>
+                        <span class="text-emerald-400">bot.db (76 MB)</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Stack:</span>
+                        <span class="text-cyan-400">Python 3.12, Asyncio, Cloudflare</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: GroupBot -->
+            <div class="bot-card glass-panel rounded-2xl p-6 transition duration-300 relative group hover:border-purple-500/40" data-cat="telegram">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-black text-xl">
+                        🛡️
+                    </div>
+                    <span class="text-[11px] font-mono bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2 py-0.5 rounded-full flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+                        groupbot.service
+                    </span>
+                </div>
+                <h4 class="text-xl font-bold text-white group-hover:text-purple-400 transition">ربات مدیریت گروه تلگرام (GroupBot)</h4>
+                <p class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
+                    سیستم ضداسپم هوشمند، پردازش و تبدیل صدا (Voice)، تولید تصاویر آماری با فونت‌های اختصاصی (statsimg)، رتبه‌بندی کاربران و پشتیبانی از ایموجی‌های پرمیوم.
+                </p>
+                <div class="mt-4 pt-4 border-t border-white/[0.06] space-y-2 text-xs code-font">
+                    <div class="flex justify-between text-slate-400">
+                        <span>Directory:</span>
+                        <span class="text-slate-200">/root/groupbot</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Database:</span>
+                        <span class="text-purple-400">bot.db (1.7 MB)</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Features:</span>
+                        <span class="text-slate-200">Voice, StatsImg, History</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Fati Bot & UserBot -->
+            <div class="bot-card glass-panel rounded-2xl p-6 transition duration-300 relative group hover:border-pink-500/40" data-cat="telegram">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500/20 to-rose-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 font-black text-xl">
+                        🤖
+                    </div>
+                    <span class="text-[11px] font-mono bg-pink-500/10 text-pink-400 border border-pink-500/20 px-2 py-0.5 rounded-full flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse"></span>
+                        fati.service
+                    </span>
+                </div>
+                <h4 class="text-xl font-bold text-white group-hover:text-pink-400 transition">ربات و یوزربات فاطی (Fati Bot)</h4>
+                <p class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
+                    ربات پیشرفته همراه با سورس اختصاصی `userbot.py`، مدیریت هوشمند اعضا و مشترکین، دیتابیس اختصاصی اعضا، سیستم پاسخگویی خودکار و گزارش‌گیری ریل‌تایم.
+                </p>
+                <div class="mt-4 pt-4 border-t border-white/[0.06] space-y-2 text-xs code-font">
+                    <div class="flex justify-between text-slate-400">
+                        <span>Directory:</span>
+                        <span class="text-slate-200">/root/fati</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Database:</span>
+                        <span class="text-pink-400">members.db (180 KB)</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Modules:</span>
+                        <span class="text-slate-200">bot.py &amp; userbot.py</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Dollar Game Bot -->
+            <div class="bot-card glass-panel rounded-2xl p-6 transition duration-300 relative group hover:border-amber-500/40" data-cat="app">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-black text-xl">
+                        💵
+                    </div>
+                    <span class="text-[11px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-full flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                        dollarbot.service
+                    </span>
+                </div>
+                <h4 class="text-xl font-bold text-white group-hover:text-amber-400 transition">ربات بازی دلار (Dollar Game)</h4>
+                <p class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
+                    ربات تلگرامی گیم و اقتصاد خرد ارز دیجیتال بر بستر دلار، ثبت تراکنش‌ها، جدول لیدربورد کاربران و رویدادهای چالش‌محور برای افزایش اینگیجمنت.
+                </p>
+                <div class="mt-4 pt-4 border-t border-white/[0.06] space-y-2 text-xs code-font">
+                    <div class="flex justify-between text-slate-400">
+                        <span>Directory:</span>
+                        <span class="text-slate-200">/root/ollargame</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Database:</span>
+                        <span class="text-amber-400">dollar_bot.db</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Engine:</span>
+                        <span class="text-slate-200">Game Logic, SQLite</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: Distort Mini-App -->
+            <div class="bot-card glass-panel rounded-2xl p-6 transition duration-300 relative group hover:border-cyan-500/40" data-cat="app">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-black text-xl">
+                        🌐
+                    </div>
+                    <span class="text-[11px] font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-2 py-0.5 rounded-full flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                        distort.service
+                    </span>
+                </div>
+                <h4 class="text-xl font-bold text-white group-hover:text-cyan-400 transition">مینی‌اپلیکیشن تلگرام (DISTORT App)</h4>
+                <p class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
+                    فول‌استک وب‌اپ تلگرام توسعه‌یافته با Node.js و Express، متصل به دیتابیس رابطه‌ای PostgreSQL، دارای پنل محصولات و احراز هویت تلگرامی.
+                </p>
+                <div class="mt-4 pt-4 border-t border-white/[0.06] space-y-2 text-xs code-font">
+                    <div class="flex justify-between text-slate-400">
+                        <span>Directory:</span>
+                        <span class="text-slate-200">/root/distort</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Postgres DB:</span>
+                        <span class="text-cyan-400">distort (Port 5432)</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Server:</span>
+                        <span class="text-slate-200">Node.js, Express, Nginx</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6: Telegram AI Bot ClickUp -->
+            <div class="bot-card glass-panel rounded-2xl p-6 transition duration-300 relative group hover:border-indigo-500/40" data-cat="telegram">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 font-black text-xl">
+                        🧠
+                    </div>
+                    <span class="text-[11px] font-mono bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded-full">
+                        Docker Ready 🐳
+                    </span>
+                </div>
+                <h4 class="text-xl font-bold text-white group-hover:text-indigo-400 transition">دستیار هوش مصنوعی و کلیک‌آپ</h4>
+                <p class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
+                    ربات یکپارچه‌ساز تلگرام با ابزار مدیریت وظایف ClickUp و هوش مصنوعی؛ تبدیل خودکار دستورات صوتی و متنی چت به تسک‌های تیم کاری.
+                </p>
+                <div class="mt-4 pt-4 border-t border-white/[0.06] space-y-2 text-xs code-font">
+                    <div class="flex justify-between text-slate-400">
+                        <span>Directory:</span>
+                        <span class="text-slate-200">/telegram_ai_bot_clickup</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Integration:</span>
+                        <span class="text-indigo-400">ClickUp API, LLM AI</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Deploy:</span>
+                        <span class="text-slate-200">Dockerfile included</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Interactive Cyberpunk Terminal / Health Console -->
+    <section id="terminal" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/[0.06]">
+        <div class="text-center mb-8">
+            <span class="text-xs font-mono uppercase tracking-wider text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-md border border-emerald-400/20">Live Diagnostics</span>
+            <h3 class="text-2xl sm:text-3xl font-black text-white mt-2">کنسول تله‌متری و سلامت سرویس‌ها</h3>
+            <p class="text-sm text-slate-400 mt-1">شبیه‌ساز وضعیت سرویس‌ها و تست دستورات مانیتورینگ روی سرور لینوکس</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-white/10 bg-[#060913] shadow-2xl code-font">
+            <!-- Terminal Title Bar -->
+            <div class="bg-[#0b101d] px-4 py-3 flex items-center justify-between border-b border-white/[0.06]">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                    <span class="text-xs text-slate-400 font-mono mr-2">root@nex6313092366-6973664:~</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs">
+                    <button onclick="runCommand('status')" class="px-2.5 py-1 rounded bg-white/[0.06] hover:bg-white/[0.12] text-slate-200 transition">systemctl</button>
+                    <button onclick="runCommand('cryptobot')" class="px-2.5 py-1 rounded bg-white/[0.06] hover:bg-white/[0.12] text-slate-200 transition">cryptobot</button>
+                    <button onclick="runCommand('databases')" class="px-2.5 py-1 rounded bg-white/[0.06] hover:bg-white/[0.12] text-slate-200 transition">databases</button>
+                    <button onclick="runCommand('clear')" class="px-2.5 py-1 rounded bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 transition">پاکسازی</button>
+                </div>
+            </div>
+
+            <!-- Terminal Output Area -->
+            <div id="terminalBody" class="p-5 text-xs text-slate-300 leading-relaxed font-mono h-80 overflow-y-auto space-y-2">
+                <div class="text-slate-500"># Faham AI Telemetry Interface initialized. Type or select a command above.</div>
+                <div class="text-emerald-400">➜ root@3hcloud-miami:~# systemctl status --active | grep -E 'fati|dollarbot|cryptobot|groupbot|distort'</div>
+                <div class="text-slate-300 pl-4 space-y-1">
+                    <div>● <span class="text-emerald-400 font-bold">cryptobot.service</span> - Crypto Telegram Bot (running, PID: 817)</div>
+                    <div>● <span class="text-emerald-400 font-bold">cryptobot-tunnel.service</span> - Secure Gateway Tunnel (running, PID: 833)</div>
+                    <div>● <span class="text-emerald-400 font-bold">fati.service</span> - Fati Telegram Bot (running, PID: 821)</div>
+                    <div>● <span class="text-emerald-400 font-bold">dollarbot.service</span> - Dollar Telegram Bot (running, PID: 819)</div>
+                    <div>● <span class="text-emerald-400 font-bold">groupbot.service</span> - Telegram Group Bot (running, PID: 1042)</div>
+                    <div>● <span class="text-emerald-400 font-bold">distort.service</span> - DISTORT Mini-App Node.js (running, PID: 1108)</div>
+                    <div>● <span class="text-emerald-400 font-bold">postgresql.service</span> - PostgreSQL 16 Server (active, port 5432)</div>
+                </div>
+                <div class="text-cyan-400 mt-2">➜ Memory Usage: 642MB / 2048MB (31%) | Load Avg: 0.14, 0.08, 0.05 | Network: 1Gb/s</div>
+            </div>
+
+            <!-- Terminal Input Prompt -->
+            <div class="bg-[#080d19] px-4 py-2.5 border-t border-white/[0.06] flex items-center gap-2">
+                <span class="text-emerald-400 font-bold">root#</span>
+                <input id="termInput" type="text" placeholder="دستور خود را تایپ کنید (مثلاً: status, help, bots, clear)..." 
+                       class="bg-transparent border-none outline-none text-white text-xs w-full font-mono placeholder-slate-600">
+                <button onclick="handleTerminalInput()" class="text-xs bg-cyan-500/20 text-cyan-300 hover:bg-cyan-500/30 px-3 py-1 rounded transition">اجرا</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture & Databases Section -->
+    <section id="database" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/[0.06]">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-xs font-mono uppercase tracking-wider text-purple-400 bg-purple-400/10 px-2.5 py-1 rounded-md border border-purple-400/20">Data Persistence</span>
+                <h3 class="text-3xl font-black text-white mt-2">امنیت اطلاعات و مدیریت پایگاه‌های داده</h3>
+                <p class="text-sm text-slate-300 mt-3 leading-relaxed font-light">
+                    تمامی داده‌های مالی، سفارش‌ها، سابقه پیام‌ها و لیدربورد کاربران با تفکیک و ایزولاسیون کامل دیتابیسی ذخیره شده‌اند و نسخه‌های پشتیبان ساختاریافته به صورت محلی و ریموت نگهداری می‌شوند.
+                </p>
+
+                <div class="mt-6 space-y-3">
+                    <div class="glass-panel p-3.5 rounded-xl flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-3">
+                            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+                            <span class="font-bold text-white">PostgreSQL 16 Engine</span>
+                        </div>
+                        <span class="code-font text-slate-400">distort_postgres_dump.sql</span>
+                    </div>
+                    <div class="glass-panel p-3.5 rounded-xl flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-3">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                            <span class="font-bold text-white">Crypto Trading SQLite</span>
+                        </div>
+                        <span class="code-font text-slate-400">cryptobot/data/bot.db (76MB)</span>
+                    </div>
+                    <div class="glass-panel p-3.5 rounded-xl flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-3">
+                            <span class="w-2.5 h-2.5 rounded-full bg-pink-400"></span>
+                            <span class="font-bold text-white">Fati Members Database</span>
+                        </div>
+                        <span class="code-font text-slate-400">fati/members.db</span>
+                    </div>
+                    <div class="glass-panel p-3.5 rounded-xl flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-3">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                            <span class="font-bold text-white">Group &amp; Dollar Game DBs</span>
+                        </div>
+                        <span class="code-font text-slate-400">groupbot/bot.db &amp; dollar_bot.db</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Architecture Diagram Container -->
+            <div class="glass-panel p-6 rounded-3xl border border-white/10 relative">
+                <div class="text-xs font-mono text-cyan-400 mb-4 flex items-center justify-between">
+                    <span>SYSTEM ARCHITECTURE DIAGRAM</span>
+                    <span class="text-slate-500">v2.5 High-Availability</span>
+                </div>
+                
+                <div class="space-y-4 text-xs code-font">
+                    <!-- Layer 1 -->
+                    <div class="p-3 bg-white/[0.03] border border-white/10 rounded-xl text-center">
+                        <div class="text-slate-400 text-[10px] uppercase">Client Ingress</div>
+                        <div class="text-white font-bold mt-1">Telegram MTProto &amp; HTTPS WebApp</div>
+                    </div>
+                    
+                    <div class="flex justify-center text-slate-500 text-xs">▼</div>
+
+                    <!-- Layer 2 -->
+                    <div class="p-3 bg-cyan-950/20 border border-cyan-500/20 rounded-xl text-center">
+                        <div class="text-cyan-400 text-[10px] uppercase">Reverse Proxy &amp; Gateway</div>
+                        <div class="text-white font-bold mt-1">Nginx 1.24 + SSL + Egress-Guard Tunnel</div>
+                    </div>
+
+                    <div class="flex justify-center text-slate-500 text-xs">▼</div>
+
+                    <!-- Layer 3 -->
+                    <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
+                        <div class="p-2.5 bg-purple-950/20 border border-purple-500/20 rounded-lg text-purple-300 font-medium">
+                            Crypto Engine
+                        </div>
+                        <div class="p-2.5 bg-emerald-950/20 border border-emerald-500/20 rounded-lg text-emerald-300 font-medium">
+                            Group &amp; Fati Bots
+                        </div>
+                        <div class="p-2.5 bg-blue-950/20 border border-blue-500/20 rounded-lg text-blue-300 font-medium">
+                            Node.js MiniApp
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center text-slate-500 text-xs">▼</div>
+
+                    <!-- Layer 4 -->
+                    <div class="p-3 bg-emerald-950/20 border border-emerald-500/20 rounded-xl text-center">
+                        <div class="text-emerald-400 text-[10px] uppercase">Data Store &amp; Persistence</div>
+                        <div class="text-slate-200 font-semibold mt-1">PostgreSQL 16 (Relational) + Multi SQLite3 Engines</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/[0.06] bg-[#020409] py-10 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                <span>© ۲۰۲۶ اکوسیستم ربات‌های هوشمند فهام (Faham AI Bots Ecosystem). کلیه حقوق محفوظ است.</span>
+            </div>
+            <div class="flex items-center gap-4 text-slate-400">
+                <a href="https://github.com/Amirkingofcrypto/faham-ai-bot" target="_blank" class="hover:text-white transition">مخزن گیت‌هاب (Private)</a>
+                <span>•</span>
+                <span class="code-font">Miami Server #189573</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Terminal Script & Filtering -->
+    <script>
+        function filterBots(category) {
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-filter') === category) {
+                    btn.classList.add('bg-white/10', 'text-white');
+                    btn.classList.remove('text-slate-400');
+                } else {
+                    btn.classList.remove('bg-white/10', 'text-white');
+                    btn.classList.add('text-slate-400');
+                }
+            });
+
+            const cards = document.querySelectorAll('.bot-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-cat') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        const terminalOutput = document.getElementById('terminalBody');
+        const termInput = document.getElementById('termInput');
+
+        termInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                handleTerminalInput();
+            }
+        });
+
+        function handleTerminalInput() {
+            const val = termInput.value.trim().toLowerCase();
+            if (!val) return;
+            termInput.value = '';
+            runCommand(val);
+        }
+
+        function runCommand(cmd) {
+            let output = '';
+            const prompt = `<div class="text-emerald-400 mt-2">➜ root@3hcloud-miami:~# ${cmd}</div>`;
+
+            switch(cmd) {
+                case 'status':
+                    output = `
+                        <div class="text-slate-300 pl-4 space-y-1">
+                            <div>cryptobot.service          <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
+                            <div>cryptobot-tunnel.service   <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
+                            <div>fati.service               <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
+                            <div>dollarbot.service          <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
+                            <div>groupbot.service           <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
+                            <div>distort.service            <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
+                            <div>postgresql.service         <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
+                        </div>
+                    `;
+                    break;
+                case 'cryptobot':
+                    output = `
+                        <div class="text-cyan-300 pl-4 space-y-1">
+                            <div>• Strategy Engine: Multi-indicator RSI (14), EMA Cross (9, 21), Volume Delta</div>
+                            <div>• Signals: Auto-published to Private Trading Channel</div>
+                            <div>• Database Bot.db: 76.6 MB (Healthy, WAL enabled)</div>
+                            <div>• Last Cycle Check: 0.04s latency</div>
+                        </div>
+                    `;
+                    break;
+                case 'databases':
+                    output = `
+                        <div class="text-purple-300 pl-4 space-y-1">
+                            <div>1. distort (PostgreSQL 16) -> Port 5432 [Dump: distort_postgres_dump.sql]</div>
+                            <div>2. /root/cryptobot/cryptobot/data/bot.db (SQLite3) [76 MB]</div>
+                            <div>3. /root/fati/members.db (SQLite3) [180 KB]</div>
+                            <div>4. /root/groupbot/bot.db (SQLite3) [1.7 MB]</div>
+                            <div>5. /root/ollargame/dollar_bot.db (SQLite3) [82 KB]</div>
+                        </div>
+                    `;
+                    break;
+                case 'bots':
+                    output = `
+                        <div class="text-slate-300 pl-4">
+                            Active Units: [cryptobot, fati, groupbot, dollarbot, distort, telegram_ai_bot, coinbot, mybot]
+                        </div>
+                    `;
+                    break;
+                case 'help':
+                    output = `
+                        <div class="text-amber-300 pl-4 space-y-1">
+                            <div>Available commands:</div>
+                            <div>- status      : Display systemctl state of all 7 bots</div>
+                            <div>- cryptobot   : Detailed crypto bot health and telemetry</div>
+                            <div>- databases   : List all active SQL databases & sizes</div>
+                            <div>- bots        : Quick list of registered bot units</div>
+                            <div>- clear       : Clear terminal window</div>
+                        </div>
+                    `;
+                    break;
+                case 'clear':
+                    terminalOutput.innerHTML = '<div class="text-slate-500"># Console cleared. Type "help" or select a preset above.</div>';
+                    return;
+                default:
+                    output = `<div class="text-rose-400 pl-4">bash: command not found: ${cmd}. Type "help" for a list of commands.</div>`;
+            }
+
+            terminalOutput.innerHTML += prompt + output;
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+    </script>
+</body>
+</html>
