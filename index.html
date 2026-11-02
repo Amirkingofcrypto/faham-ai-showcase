@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اکوسیستم ربات‌های فهام | Faham AI Bot Ecosystem</title>
-    <meta name="description" content="مرکز مدیریت، معماری و مانیتورینگ ربات‌های هوشمند فهام: ربات کریپتو، ربات گروه، فاطی، بازی دلار و مینی‌اپلیکیشن‌ها">
+    <title>فهام AI | دستیار هوشمند و ایجنت خودکار تلگرام</title>
+    <meta name="description" content="فهام AI (Faham AI Bot) - نسل نوین ایجنت‌های هوشمند تلگرام، متصل به هوش مصنوعی OpenAI و سیستم مدیریت تسک‌های ClickUp با تاییدیه دو مرحله‌ای انسان در چرخه">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -12,15 +12,17 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            dark: '#05070d',
-                            card: '#0a0e17',
-                            border: 'rgba(255, 255, 255, 0.08)',
+                        ai: {
+                            base: '#030611',
+                            card: '#080d1e',
+                            cardHover: '#0e1630',
                             cyan: '#00f2fe',
+                            neon: '#38bdf8',
+                            purple: '#a855f7',
+                            violet: '#6366f1',
                             emerald: '#10b981',
-                            purple: '#8b5cf6',
-                            rose: '#f43f5e',
                             amber: '#f59e0b',
+                            rose: '#f43f5e',
                         }
                     },
                     fontFamily: {
@@ -36,655 +38,765 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #03060d;
+            background-color: #030611;
             font-family: 'Vazirmatn', sans-serif;
-            color: #e2e8f0;
+            color: #f1f5f9;
             overflow-x: hidden;
+            selection-background-color: #00f2fe;
+            selection-color: #000;
+        }
+        ::selection {
+            background: rgba(0, 242, 254, 0.3);
+            color: #fff;
         }
         .code-font {
             font-family: 'JetBrains Mono', monospace;
             direction: ltr;
         }
-        /* Custom Glowing Grid */
-        .cyber-grid {
-            background-size: 40px 40px;
+        /* Background Grid & Cyber Lines */
+        .ai-grid {
+            background-size: 44px 44px;
             background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+                linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
         }
         .glow-cyan {
-            box-shadow: 0 0 25px -5px rgba(0, 242, 254, 0.35);
+            box-shadow: 0 0 35px -5px rgba(0, 242, 254, 0.4);
         }
-        .glow-emerald {
-            box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.35);
+        .glow-purple {
+            box-shadow: 0 0 35px -5px rgba(168, 85, 247, 0.4);
+        }
+        .glow-card {
+            transition: all 0.3s ease;
+        }
+        .glow-card:hover {
+            box-shadow: 0 10px 40px -10px rgba(0, 242, 254, 0.15);
+            border-color: rgba(0, 242, 254, 0.35);
+            transform: translateY(-3px);
         }
         .glass-panel {
-            background: rgba(10, 14, 23, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(8, 13, 30, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .glass-panel:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-        /* Neon gradient text */
         .text-gradient {
-            background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 50%, #00f2fe 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 40%, #00f2fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .text-gradient-crypto {
-            background: linear-gradient(135deg, #10b981 0%, #00f2fe 100%);
+        .text-gradient-purple {
+            background: linear-gradient(135deg, #c084fc 0%, #6366f1 50%, #00f2fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        /* Tabular nums */
-        .tabular {
-            font-variant-numeric: tabular-nums;
+        /* Animated Telegram chat typing dots */
+        @keyframes blink {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        .typing-dot {
+            animation: blink 1.4s infinite both;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        /* Floating Orb Animation */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+        .animate-float {
+            animation: floatSlow 8s ease-in-out infinite;
         }
     </style>
 </head>
-<body class="cyber-grid relative min-h-screen">
+<body class="ai-grid relative min-h-screen text-slate-100">
 
-    <!-- Ambient Gradient Blobs -->
-    <div class="fixed top-0 left-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
-    <div class="fixed top-1/3 right-10 w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none -z-10"></div>
-    <div class="fixed bottom-10 left-1/3 w-80 h-80 bg-emerald-600/10 rounded-full blur-[130px] pointer-events-none -z-10"></div>
+    <!-- Ambient Glowing Nebulas -->
+    <div class="fixed top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-[170px] pointer-events-none -z-10 animate-float"></div>
+    <div class="fixed top-1/2 right-10 w-[600px] h-[600px] bg-purple-600/15 rounded-full blur-[190px] pointer-events-none -z-10 animate-float" style="animation-delay: -4s;"></div>
+    <div class="fixed bottom-0 left-1/3 w-[450px] h-[450px] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none -z-10"></div>
 
-    <!-- Live Market & System Ticker Header -->
-    <div class="w-full bg-[#050811]/90 backdrop-blur-md border-b border-white/[0.06] text-xs py-2 px-4 sticky top-0 z-50">
+    <!-- Top Status Ribbon -->
+    <header class="w-full bg-[#050917]/90 backdrop-blur-md border-b border-white/[0.07] text-xs py-2.5 px-4 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
-            <!-- Left: Node Status -->
+            <!-- Left: Engine Status -->
             <div class="flex items-center gap-3">
-                <div class="flex items-center gap-2 bg-emerald-950/40 border border-emerald-500/20 px-2.5 py-1 rounded-full text-emerald-400 font-medium">
+                <div class="flex items-center gap-2 bg-cyan-950/40 border border-cyan-500/30 px-3 py-1 rounded-full text-cyan-300 font-medium">
                     <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
                     </span>
-                    <span class="code-font text-[11px]">3HCloud • Miami (US)</span>
+                    <span class="code-font text-[11px] font-semibold">FAHAM AI AGENT • ONLINE</span>
                 </div>
-                <div class="hidden md:flex items-center gap-1.5 text-slate-400 text-[11px] code-font">
-                    <span>IP:</span>
-                    <span class="text-slate-200">104.167.199.15</span>
-                    <span class="text-slate-600">|</span>
-                    <span class="text-emerald-400">RTT &lt;14ms</span>
+                <div class="hidden sm:flex items-center gap-2 text-slate-400 text-[11px] code-font">
+                    <span>Model:</span>
+                    <span class="text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">GPT-5-Mini / OpenAI</span>
                 </div>
             </div>
 
-            <!-- Center: Live Crypto Feeds -->
-            <div class="hidden lg:flex items-center gap-6 code-font text-[11px]">
+            <!-- Center: Core Specs -->
+            <div class="hidden md:flex items-center gap-6 code-font text-[11px] text-slate-300">
                 <div class="flex items-center gap-1.5">
-                    <span class="text-slate-400 font-bold">BTC/USDT</span>
-                    <span class="text-emerald-400 font-semibold tabular">$88,420</span>
-                    <span class="text-emerald-500 text-[10px] bg-emerald-500/10 px-1 rounded">+3.8%</span>
+                    <span class="text-purple-400">●</span>
+                    <span>ClickUp API v2 Sync: <strong class="text-emerald-400">Active</strong></span>
                 </div>
                 <div class="flex items-center gap-1.5">
-                    <span class="text-slate-400 font-bold">TON/USDT</span>
-                    <span class="text-cyan-400 font-semibold tabular">$5.34</span>
-                    <span class="text-cyan-500 text-[10px] bg-cyan-500/10 px-1 rounded">+2.1%</span>
+                    <span class="text-cyan-400">●</span>
+                    <span>Safety Shield: <strong class="text-cyan-300">Human-in-the-Loop</strong></span>
                 </div>
                 <div class="flex items-center gap-1.5">
-                    <span class="text-slate-400 font-bold">ACTIVE DAEMONS</span>
-                    <span class="text-purple-400 font-bold">9 Services</span>
+                    <span class="text-amber-400">●</span>
+                    <span>Latency: <strong class="text-slate-100">&lt; 120ms</strong></span>
                 </div>
             </div>
 
-            <!-- Right: Actions -->
+            <!-- Right: GitHub Link -->
             <div class="flex items-center gap-3">
-                <a href="https://github.com/Amirkingofcrypto/faham-ai-bot" target="_blank" class="flex items-center gap-1.5 bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 px-3 py-1 rounded-lg text-slate-200 text-xs transition duration-150">
+                <a href="https://github.com/Amirkingofcrypto/faham-ai-bot" target="_blank" class="flex items-center gap-1.5 bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 px-3 py-1 rounded-lg text-slate-200 text-xs transition duration-150">
                     <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                    <span>سورس گیت‌هاب</span>
+                    <span>سورس پروژه</span>
                 </a>
             </div>
         </div>
-    </div>
+    </header>
 
-    <!-- Main Navigation Bar -->
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 p-[1px] glow-cyan">
-                <div class="w-full h-full bg-[#070b14] rounded-xl flex items-center justify-center font-black text-cyan-400 text-lg">
-                    ف
+    <!-- Navigation -->
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
+        <div class="flex items-center gap-3.5">
+            <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 p-[1.5px] glow-cyan">
+                <div class="w-full h-full bg-[#060a17] rounded-2xl flex items-center justify-center font-black text-cyan-300 text-xl tracking-tighter">
+                    AI
                 </div>
             </div>
             <div>
-                <h1 class="text-lg font-bold text-white tracking-wide flex items-center gap-2">
-                    اکوسیستم ربات‌های فهام
-                    <span class="text-[10px] font-mono uppercase bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 px-2 py-0.5 rounded-full">v2.5 Enterprise</span>
+                <h1 class="text-xl font-extrabold text-white tracking-wide flex items-center gap-2">
+                    فهام AI
+                    <span class="text-[11px] font-mono text-cyan-300 bg-cyan-500/10 border border-cyan-500/30 px-2 py-0.5 rounded-full">Autonomous Bot</span>
                 </h1>
-                <p class="text-[11px] text-slate-400">شبکه خودکار ربات‌های تلگرام، ترید و مدیریت هوشمند</p>
+                <p class="text-xs text-slate-400">دستیار هوشمند و ایجنت اتوماسیون سازمانی تلگرام</p>
             </div>
         </div>
 
-        <div class="hidden md:flex items-center gap-6 text-sm text-slate-300">
-            <a href="#bots" class="hover:text-cyan-400 transition">ربات‌ها و پروژه‌ها</a>
-            <a href="#architecture" class="hover:text-cyan-400 transition">معماری سیستم</a>
-            <a href="#terminal" class="hover:text-cyan-400 transition">کنسول و تله‌متری</a>
-            <a href="#database" class="hover:text-cyan-400 transition">پایگاه‌های داده</a>
+        <div class="hidden md:flex items-center gap-8 text-sm text-slate-300 font-medium">
+            <a href="#simulator" class="hover:text-cyan-400 transition">شبیه‌ساز چت زنده</a>
+            <a href="#features" class="hover:text-cyan-400 transition">قابلیت‌های هوش مصنوعی</a>
+            <a href="#architecture" class="hover:text-cyan-400 transition">معماری و امنیت</a>
+            <a href="#commands" class="hover:text-cyan-400 transition">دستورات و اتصال ClickUp</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16 text-center relative">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs text-slate-300 mb-6">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-            پشتیبان‌گیری کامل ۱۰۰٪ سرور ابری انجام و روی مخزن امن مستقر گردید
-        </div>
-
-        <h2 class="text-4xl sm:text-6xl font-black text-gradient max-w-4xl mx-auto leading-tight mb-6">
-            زیرساخت هوشمند و ماژولار ربات‌های فهام
-        </h2>
-
-        <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-            مجموعه‌ای یکپارچه از ربات‌های الگوریتمی کریپتو، مدیریت خودکار گروه‌های تلگرام، مینی‌اپ‌های تعاملی تلگرام و دستیارهای هوش مصنوعی تحت پایتون ۳.۱۲ و سرورهای فوق‌سریع.
-        </p>
-
-        <!-- Metrics Row -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
-            <div class="glass-panel p-4 rounded-2xl">
-                <div class="text-2xl sm:text-3xl font-black text-cyan-400 code-font tabular">9+</div>
-                <div class="text-xs text-slate-400 mt-1 font-medium">سرویس‌های اختصاصی فعال</div>
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 relative">
+        <div class="text-center max-w-4xl mx-auto">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-xs text-cyan-300 mb-8 font-medium">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                <span>ترکیب مدل‌های زبانی OpenAI و ابزار مدیریت پروژه ClickUp</span>
             </div>
-            <div class="glass-panel p-4 rounded-2xl">
-                <div class="text-2xl sm:text-3xl font-black text-emerald-400 code-font tabular">99.98%</div>
-                <div class="text-xs text-slate-400 mt-1 font-medium">آپ‌تایم سرور میامی</div>
-            </div>
-            <div class="glass-panel p-4 rounded-2xl">
-                <div class="text-2xl sm:text-3xl font-black text-purple-400 code-font tabular">1,099</div>
-                <div class="text-xs text-slate-400 mt-1 font-medium">فایل سورس و دیتابیس</div>
-            </div>
-            <div class="glass-panel p-4 rounded-2xl">
-                <div class="text-2xl sm:text-3xl font-black text-amber-400 code-font tabular">&lt;15ms</div>
-                <div class="text-xs text-slate-400 mt-1 font-medium">تاخیر پردازش ایونت‌ها</div>
-            </div>
-        </div>
 
-        <!-- Action Buttons -->
-        <div class="flex flex-wrap items-center justify-center gap-4">
-            <a href="#bots" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-bold px-6 py-3 rounded-xl transition shadow-lg glow-cyan text-sm flex items-center gap-2">
-                <span>بررسی پروژه‌ها و ربات‌ها</span>
-                <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
-            <a href="#terminal" class="glass-panel hover:bg-white/[0.08] text-white px-6 py-3 rounded-xl transition text-sm flex items-center gap-2 code-font">
-                <span>کنسول تله‌متری سرور</span>
-                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            </a>
+            <!-- Title -->
+            <h2 class="text-4xl sm:text-6xl lg:text-7xl font-black text-gradient leading-[1.15] mb-6 tracking-tight">
+                تبدیل گفتگوی تلگرام به <br/>
+                <span class="text-gradient-purple">تسک‌های عملیاتی و خودکار</span>
+            </h2>
+
+            <!-- Subtitle -->
+            <p class="text-base sm:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
+                ربات هوش مصنوعی **فهام AI** مکالمات، وویس‌ها و دستورات شما در تلگرام را پردازش کرده، تسک‌های حرفه‌ای ClickUp با عنوان، توضیحات، اولویت و لیست مناسب تولید می‌کند و قبل از هر اجرا، تاییدیه مستقیم شما را دریافت می‌نماید.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+                <a href="#simulator" class="bg-gradient-to-r from-cyan-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-black font-extrabold px-8 py-3.5 rounded-2xl transition shadow-xl glow-cyan text-sm flex items-center gap-2.5">
+                    <span>تست زنده شبیه‌ساز بات</span>
+                    <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+                <a href="#architecture" class="glass-panel hover:bg-white/[0.08] text-white px-7 py-3.5 rounded-2xl transition text-sm flex items-center gap-2 font-medium">
+                    <span>بررسی معماری Human-in-the-Loop</span>
+                    <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                </a>
+            </div>
+
+            <!-- High-Level Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-right">
+                <div class="glass-panel p-5 rounded-2xl border-white/[0.08] glow-card">
+                    <div class="text-xs text-slate-400 mb-1">مکانیزم امنیتی</div>
+                    <div class="text-lg font-bold text-cyan-300">100% انسان در چرخه</div>
+                    <div class="text-[11px] text-slate-500 mt-1">بدون اجرای تصادفی یا ناخواسته</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border-white/[0.08] glow-card">
+                    <div class="text-xs text-slate-400 mb-1">مدل زبانی هوش مصنوعی</div>
+                    <div class="text-lg font-bold text-purple-300 code-font">OpenAI GPT-5/4o</div>
+                    <div class="text-[11px] text-slate-500 mt-1">درک عمیق زبان فارسی و اصطلاحات</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border-white/[0.08] glow-card">
+                    <div class="text-xs text-slate-400 mb-1">یکپارچگی کاری</div>
+                    <div class="text-lg font-bold text-emerald-300">ClickUp API v2</div>
+                    <div class="text-[11px] text-slate-500 mt-1">پشتیبانی کامل Space, Folder, List</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border-white/[0.08] glow-card">
+                    <div class="text-xs text-slate-400 mb-1">کنترل دسترسی</div>
+                    <div class="text-lg font-bold text-amber-300">RBAC با ID تلگرام</div>
+                    <div class="text-[11px] text-slate-500 mt-1">مسدودسازی کاربران ناشناس</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Bots Showcase Section -->
-    <section id="bots" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/[0.06]">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-            <div>
-                <span class="text-xs font-mono uppercase tracking-wider text-cyan-400 bg-cyan-400/10 px-2.5 py-1 rounded-md border border-cyan-400/20">Core Modules</span>
-                <h3 class="text-2xl sm:text-3xl font-black text-white mt-2">ربات‌ها و ماژول‌های فعال فهام</h3>
-                <p class="text-sm text-slate-400 mt-1">مشاهده مشخصات فنی، معماری و عملکرد هر یک از سرویس‌های عملیاتی</p>
-            </div>
-            
-            <!-- Quick Filter Tabs -->
-            <div class="flex items-center gap-2 bg-[#0a0e17] p-1 rounded-xl border border-white/10 text-xs">
-                <button onclick="filterBots('all')" class="tab-btn active px-3 py-1.5 rounded-lg bg-white/10 text-white font-medium transition" data-filter="all">همه</button>
-                <button onclick="filterBots('trading')" class="tab-btn px-3 py-1.5 rounded-lg hover:bg-white/5 text-slate-400 hover:text-white transition" data-filter="trading">معاملاتی / کریپتو</button>
-                <button onclick="filterBots('telegram')" class="tab-btn px-3 py-1.5 rounded-lg hover:bg-white/5 text-slate-400 hover:text-white transition" data-filter="telegram">مدیریت تلگرام</button>
-                <button onclick="filterBots('app')" class="tab-btn px-3 py-1.5 rounded-lg hover:bg-white/5 text-slate-400 hover:text-white transition" data-filter="app">مینی‌اپ و بازی</button>
-            </div>
+    <!-- LIVE TELEGRAM CHAT SIMULATOR SECTION -->
+    <section id="simulator" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/[0.07]">
+        <div class="text-center mb-10">
+            <span class="text-xs font-mono uppercase tracking-wider text-cyan-400 bg-cyan-400/10 px-3 py-1 rounded-md border border-cyan-400/30">Interactive Demo</span>
+            <h3 class="text-3xl sm:text-4xl font-black text-white mt-3">شبیه‌ساز تعاملی عملکرد فهام AI</h3>
+            <p class="text-sm text-slate-400 mt-2 max-w-xl mx-auto">
+                یکی از سناریوهای آماده زیر را انتخاب کنید یا پیام دلخواه خود را بنویسید تا هوش مصنوعی پردازش و ساخت تسک را در لحظه شبیه‌سازی کند:
+            </p>
         </div>
 
-        <!-- Bot Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="botsContainer">
-            
-            <!-- Card 1: CryptoBot -->
-            <div class="bot-card glass-panel rounded-2xl p-6 transition duration-300 relative group hover:border-cyan-500/40" data-cat="trading">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-black text-xl">
-                        ⚡
+        <!-- Simulator Mockup Container -->
+        <div class="max-w-3xl mx-auto rounded-3xl overflow-hidden border border-white/10 bg-[#080d1f] shadow-2xl relative glow-cyan">
+            <!-- Telegram App Header -->
+            <div class="bg-[#0e1730] px-5 py-3.5 flex items-center justify-between border-b border-white/[0.08]">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-400 to-indigo-600 flex items-center justify-center font-bold text-black text-sm shadow-md">
+                        ف
                     </div>
-                    <span class="text-[11px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        cryptobot.service
-                    </span>
+                    <div>
+                        <div class="text-sm font-bold text-white flex items-center gap-2">
+                            Faham AI Assistant
+                            <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.2 rounded font-mono">bot</span>
+                        </div>
+                        <div class="text-[11px] text-emerald-400 font-medium flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span>همیشه آنلاین • OpenAI Connected</span>
+                        </div>
+                    </div>
                 </div>
-                <h4 class="text-xl font-bold text-white group-hover:text-cyan-400 transition">ربات تریدر کریپتو (CryptoBot)</h4>
-                <p class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
-                    موتور اتوترید و ارائه‌دهنده سیگنال‌های پیشرفته با استراتژی‌های تحلیل تکنیکال (RSI, EMA, Bollinger)، بک‌تستینگ خودکار، ماژول تونل امن و رابط وب‌اپلیکیشن.
-                </p>
-                <div class="mt-4 pt-4 border-t border-white/[0.06] space-y-2 text-xs code-font">
-                    <div class="flex justify-between text-slate-400">
-                        <span>Directory:</span>
-                        <span class="text-slate-200">/root/cryptobot</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Database:</span>
-                        <span class="text-emerald-400">bot.db (76 MB)</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Stack:</span>
-                        <span class="text-cyan-400">Python 3.12, Asyncio, Cloudflare</span>
-                    </div>
+                <!-- Telegram Header Actions -->
+                <div class="flex items-center gap-2">
+                    <button onclick="resetChat()" class="text-xs bg-white/[0.06] hover:bg-white/[0.12] text-slate-300 px-3 py-1.5 rounded-lg transition">
+                        ریست گفتگو
+                    </button>
                 </div>
             </div>
 
-            <!-- Card 2: GroupBot -->
-            <div class="bot-card glass-panel rounded-2xl p-6 transition duration-300 relative group hover:border-purple-500/40" data-cat="telegram">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 font-black text-xl">
-                        🛡️
-                    </div>
-                    <span class="text-[11px] font-mono bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2 py-0.5 rounded-full flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
-                        groupbot.service
-                    </span>
-                </div>
-                <h4 class="text-xl font-bold text-white group-hover:text-purple-400 transition">ربات مدیریت گروه تلگرام (GroupBot)</h4>
-                <p class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
-                    سیستم ضداسپم هوشمند، پردازش و تبدیل صدا (Voice)، تولید تصاویر آماری با فونت‌های اختصاصی (statsimg)، رتبه‌بندی کاربران و پشتیبانی از ایموجی‌های پرمیوم.
-                </p>
-                <div class="mt-4 pt-4 border-t border-white/[0.06] space-y-2 text-xs code-font">
-                    <div class="flex justify-between text-slate-400">
-                        <span>Directory:</span>
-                        <span class="text-slate-200">/root/groupbot</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Database:</span>
-                        <span class="text-purple-400">bot.db (1.7 MB)</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Features:</span>
-                        <span class="text-slate-200">Voice, StatsImg, History</span>
-                    </div>
-                </div>
+            <!-- Quick Preset Prompts Bar -->
+            <div class="bg-[#0b1226] px-4 py-2.5 border-b border-white/[0.06] flex items-center gap-2 overflow-x-auto text-xs">
+                <span class="text-slate-400 text-[11px] whitespace-nowrap">پیش‌فرض‌ها:</span>
+                <button onclick="sendPreset(1)" class="whitespace-nowrap px-3 py-1 rounded-full bg-white/[0.05] hover:bg-cyan-500/20 hover:text-cyan-300 text-slate-300 border border-white/10 transition">
+                    📝 ساخت تسک بازطراحی لندینگ
+                </button>
+                <button onclick="sendPreset(2)" class="whitespace-nowrap px-3 py-1 rounded-full bg-white/[0.05] hover:bg-purple-500/20 hover:text-purple-300 text-slate-300 border border-white/10 transition">
+                    🐛 گزارش باگ درگاه پرداخت
+                </button>
+                <button onclick="sendPreset(3)" class="whitespace-nowrap px-3 py-1 rounded-full bg-white/[0.05] hover:bg-emerald-500/20 hover:text-emerald-300 text-slate-300 border border-white/10 transition">
+                    📊 خلاصه‌سازی وضعیت تسک‌ها
+                </button>
             </div>
 
-            <!-- Card 3: Fati Bot & UserBot -->
-            <div class="bot-card glass-panel rounded-2xl p-6 transition duration-300 relative group hover:border-pink-500/40" data-cat="telegram">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500/20 to-rose-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 font-black text-xl">
+            <!-- Chat Messages Flow Container -->
+            <div id="chatMessages" class="p-6 space-y-4 min-h-[380px] max-h-[500px] overflow-y-auto text-sm leading-relaxed">
+                <!-- Welcome Bot Message -->
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-cyan-600/30 border border-cyan-500/30 flex-shrink-0 flex items-center justify-center text-xs text-cyan-300">
                         🤖
                     </div>
-                    <span class="text-[11px] font-mono bg-pink-500/10 text-pink-400 border border-pink-500/20 px-2 py-0.5 rounded-full flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse"></span>
-                        fati.service
-                    </span>
-                </div>
-                <h4 class="text-xl font-bold text-white group-hover:text-pink-400 transition">ربات و یوزربات فاطی (Fati Bot)</h4>
-                <p class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
-                    ربات پیشرفته همراه با سورس اختصاصی `userbot.py`، مدیریت هوشمند اعضا و مشترکین، دیتابیس اختصاصی اعضا، سیستم پاسخگویی خودکار و گزارش‌گیری ریل‌تایم.
-                </p>
-                <div class="mt-4 pt-4 border-t border-white/[0.06] space-y-2 text-xs code-font">
-                    <div class="flex justify-between text-slate-400">
-                        <span>Directory:</span>
-                        <span class="text-slate-200">/root/fati</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Database:</span>
-                        <span class="text-pink-400">members.db (180 KB)</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Modules:</span>
-                        <span class="text-slate-200">bot.py &amp; userbot.py</span>
+                    <div class="bg-[#121c38] border border-white/[0.07] rounded-2xl rounded-tr-none p-4 max-w-[85%] text-slate-200 shadow-md">
+                        <div class="font-bold text-xs text-cyan-300 mb-1">فهام AI</div>
+                        سلام! من دستیار هوشمند فهام هستم. هر تسک، یادداشت، باگ یا ایده‌ای که داری رو همینجا برام بنویس؛ من با هوش مصنوعی ساختارش می‌دم و برای تاییدت در اختیارت می‌ذارم تا با یک کلیک توی ClickUp ثبت بشه! ✨
                     </div>
                 </div>
             </div>
 
-            <!-- Card 4: Dollar Game Bot -->
-            <div class="bot-card glass-panel rounded-2xl p-6 transition duration-300 relative group hover:border-amber-500/40" data-cat="app">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-black text-xl">
-                        💵
-                    </div>
-                    <span class="text-[11px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-full flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-                        dollarbot.service
-                    </span>
-                </div>
-                <h4 class="text-xl font-bold text-white group-hover:text-amber-400 transition">ربات بازی دلار (Dollar Game)</h4>
-                <p class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
-                    ربات تلگرامی گیم و اقتصاد خرد ارز دیجیتال بر بستر دلار، ثبت تراکنش‌ها، جدول لیدربورد کاربران و رویدادهای چالش‌محور برای افزایش اینگیجمنت.
-                </p>
-                <div class="mt-4 pt-4 border-t border-white/[0.06] space-y-2 text-xs code-font">
-                    <div class="flex justify-between text-slate-400">
-                        <span>Directory:</span>
-                        <span class="text-slate-200">/root/ollargame</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Database:</span>
-                        <span class="text-amber-400">dollar_bot.db</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Engine:</span>
-                        <span class="text-slate-200">Game Logic, SQLite</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 5: Distort Mini-App -->
-            <div class="bot-card glass-panel rounded-2xl p-6 transition duration-300 relative group hover:border-cyan-500/40" data-cat="app">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-black text-xl">
-                        🌐
-                    </div>
-                    <span class="text-[11px] font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-2 py-0.5 rounded-full flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-                        distort.service
-                    </span>
-                </div>
-                <h4 class="text-xl font-bold text-white group-hover:text-cyan-400 transition">مینی‌اپلیکیشن تلگرام (DISTORT App)</h4>
-                <p class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
-                    فول‌استک وب‌اپ تلگرام توسعه‌یافته با Node.js و Express، متصل به دیتابیس رابطه‌ای PostgreSQL، دارای پنل محصولات و احراز هویت تلگرامی.
-                </p>
-                <div class="mt-4 pt-4 border-t border-white/[0.06] space-y-2 text-xs code-font">
-                    <div class="flex justify-between text-slate-400">
-                        <span>Directory:</span>
-                        <span class="text-slate-200">/root/distort</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Postgres DB:</span>
-                        <span class="text-cyan-400">distort (Port 5432)</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Server:</span>
-                        <span class="text-slate-200">Node.js, Express, Nginx</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 6: Telegram AI Bot ClickUp -->
-            <div class="bot-card glass-panel rounded-2xl p-6 transition duration-300 relative group hover:border-indigo-500/40" data-cat="telegram">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 font-black text-xl">
-                        🧠
-                    </div>
-                    <span class="text-[11px] font-mono bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded-full">
-                        Docker Ready 🐳
-                    </span>
-                </div>
-                <h4 class="text-xl font-bold text-white group-hover:text-indigo-400 transition">دستیار هوش مصنوعی و کلیک‌آپ</h4>
-                <p class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
-                    ربات یکپارچه‌ساز تلگرام با ابزار مدیریت وظایف ClickUp و هوش مصنوعی؛ تبدیل خودکار دستورات صوتی و متنی چت به تسک‌های تیم کاری.
-                </p>
-                <div class="mt-4 pt-4 border-t border-white/[0.06] space-y-2 text-xs code-font">
-                    <div class="flex justify-between text-slate-400">
-                        <span>Directory:</span>
-                        <span class="text-slate-200">/telegram_ai_bot_clickup</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Integration:</span>
-                        <span class="text-indigo-400">ClickUp API, LLM AI</span>
-                    </div>
-                    <div class="flex justify-between text-slate-400">
-                        <span>Deploy:</span>
-                        <span class="text-slate-200">Dockerfile included</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Interactive Cyberpunk Terminal / Health Console -->
-    <section id="terminal" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/[0.06]">
-        <div class="text-center mb-8">
-            <span class="text-xs font-mono uppercase tracking-wider text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-md border border-emerald-400/20">Live Diagnostics</span>
-            <h3 class="text-2xl sm:text-3xl font-black text-white mt-2">کنسول تله‌متری و سلامت سرویس‌ها</h3>
-            <p class="text-sm text-slate-400 mt-1">شبیه‌ساز وضعیت سرویس‌ها و تست دستورات مانیتورینگ روی سرور لینوکس</p>
-        </div>
-
-        <div class="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-white/10 bg-[#060913] shadow-2xl code-font">
-            <!-- Terminal Title Bar -->
-            <div class="bg-[#0b101d] px-4 py-3 flex items-center justify-between border-b border-white/[0.06]">
-                <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
-                    <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
-                    <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-                    <span class="text-xs text-slate-400 font-mono mr-2">root@nex6313092366-6973664:~</span>
-                </div>
-                <div class="flex items-center gap-2 text-xs">
-                    <button onclick="runCommand('status')" class="px-2.5 py-1 rounded bg-white/[0.06] hover:bg-white/[0.12] text-slate-200 transition">systemctl</button>
-                    <button onclick="runCommand('cryptobot')" class="px-2.5 py-1 rounded bg-white/[0.06] hover:bg-white/[0.12] text-slate-200 transition">cryptobot</button>
-                    <button onclick="runCommand('databases')" class="px-2.5 py-1 rounded bg-white/[0.06] hover:bg-white/[0.12] text-slate-200 transition">databases</button>
-                    <button onclick="runCommand('clear')" class="px-2.5 py-1 rounded bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 transition">پاکسازی</button>
-                </div>
-            </div>
-
-            <!-- Terminal Output Area -->
-            <div id="terminalBody" class="p-5 text-xs text-slate-300 leading-relaxed font-mono h-80 overflow-y-auto space-y-2">
-                <div class="text-slate-500"># Faham AI Telemetry Interface initialized. Type or select a command above.</div>
-                <div class="text-emerald-400">➜ root@3hcloud-miami:~# systemctl status --active | grep -E 'fati|dollarbot|cryptobot|groupbot|distort'</div>
-                <div class="text-slate-300 pl-4 space-y-1">
-                    <div>● <span class="text-emerald-400 font-bold">cryptobot.service</span> - Crypto Telegram Bot (running, PID: 817)</div>
-                    <div>● <span class="text-emerald-400 font-bold">cryptobot-tunnel.service</span> - Secure Gateway Tunnel (running, PID: 833)</div>
-                    <div>● <span class="text-emerald-400 font-bold">fati.service</span> - Fati Telegram Bot (running, PID: 821)</div>
-                    <div>● <span class="text-emerald-400 font-bold">dollarbot.service</span> - Dollar Telegram Bot (running, PID: 819)</div>
-                    <div>● <span class="text-emerald-400 font-bold">groupbot.service</span> - Telegram Group Bot (running, PID: 1042)</div>
-                    <div>● <span class="text-emerald-400 font-bold">distort.service</span> - DISTORT Mini-App Node.js (running, PID: 1108)</div>
-                    <div>● <span class="text-emerald-400 font-bold">postgresql.service</span> - PostgreSQL 16 Server (active, port 5432)</div>
-                </div>
-                <div class="text-cyan-400 mt-2">➜ Memory Usage: 642MB / 2048MB (31%) | Load Avg: 0.14, 0.08, 0.05 | Network: 1Gb/s</div>
-            </div>
-
-            <!-- Terminal Input Prompt -->
-            <div class="bg-[#080d19] px-4 py-2.5 border-t border-white/[0.06] flex items-center gap-2">
-                <span class="text-emerald-400 font-bold">root#</span>
-                <input id="termInput" type="text" placeholder="دستور خود را تایپ کنید (مثلاً: status, help, bots, clear)..." 
-                       class="bg-transparent border-none outline-none text-white text-xs w-full font-mono placeholder-slate-600">
-                <button onclick="handleTerminalInput()" class="text-xs bg-cyan-500/20 text-cyan-300 hover:bg-cyan-500/30 px-3 py-1 rounded transition">اجرا</button>
+            <!-- Interactive Telegram Input Bar -->
+            <div class="bg-[#0b1226] p-3 border-t border-white/[0.08] flex items-center gap-2">
+                <input id="chatInput" type="text" placeholder="پیام یا درخواست خود را بنویسید (مثلاً: یک تسک برای بکاپ‌گیری روزانه سرور بساز)..." 
+                       class="bg-[#131d38] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none focus:border-cyan-400/50 flex-1 transition">
+                <button onclick="handleUserMessage()" class="bg-cyan-500 hover:bg-cyan-400 text-black font-bold p-2.5 rounded-xl transition shadow-lg glow-cyan flex items-center justify-center">
+                    <svg class="w-5 h-5 transform -rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Architecture & Databases Section -->
-    <section id="database" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/[0.06]">
+    <!-- CORE FEATURES GRID -->
+    <section id="features" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/[0.07]">
+        <div class="text-center mb-14">
+            <span class="text-xs font-mono uppercase tracking-wider text-purple-400 bg-purple-400/10 px-3 py-1 rounded-md border border-purple-400/30">Capabilities</span>
+            <h3 class="text-3xl sm:text-4xl font-black text-white mt-3">چرا فهام AI متفاوت و قدرتمند است؟</h3>
+            <p class="text-sm text-slate-400 mt-2 max-w-2xl mx-auto">
+                طراحی شده برای مدیران، برنامه‌نویسان و تیم‌های چابکی که می‌خواهند بدون باز کردن برنامه‌های سنگین، مستقیماً از تلگرام کارهایشان را هدایت کنند.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Feature 1 -->
+            <div class="glass-panel p-7 rounded-3xl glow-card relative">
+                <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-2xl text-cyan-400 mb-5">
+                    🧠
+                </div>
+                <h4 class="text-xl font-bold text-white mb-2">استخراج هوشمند جزئیات تسک</h4>
+                <p class="text-xs text-slate-300 leading-relaxed font-light">
+                    نیاز به قالب‌بندی خشک ندارید؛ کافیست به زبان ساده صحبت کنید. هوش مصنوعی عنوان تسک، جزئیات فنی، درجه اولویت (Urgent, High, Normal) و چک‌لیست اقدامات را اتوماتیک تفکیک می‌کند.
+                </p>
+                <div class="mt-4 pt-3 border-t border-white/[0.06] flex items-center gap-2 text-[11px] text-cyan-300 font-mono">
+                    <span>NLP • Intent Extraction</span>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="glass-panel p-7 rounded-3xl glow-card relative">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-2xl text-emerald-400 mb-5">
+                    🛡️
+                </div>
+                <h4 class="text-xl font-bold text-white mb-2">تاییدیه دو مرحله‌ای (Human-in-the-Loop)</h4>
+                <p class="text-xs text-slate-300 leading-relaxed font-light">
+                    هیچ اکشنی بدون تایید شما انجام نمی‌شود. ربات پیش‌نمایش دقیق دیتای خروجی را تولید کرده و با دکمه‌های اینلاین `✅ تأیید و اجرا` و `❌ لغو` منتظر تصمیم نهایی شما می‌ماند.
+                </p>
+                <div class="mt-4 pt-3 border-t border-white/[0.06] flex items-center gap-2 text-[11px] text-emerald-300 font-mono">
+                    <span>Zero Hallucination Actions</span>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="glass-panel p-7 rounded-3xl glow-card relative">
+                <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-2xl text-purple-400 mb-5">
+                    ⚡
+                </div>
+                <h4 class="text-xl font-bold text-white mb-2">یکپارچه‌سازی عمیق با ClickUp</h4>
+                <p class="text-xs text-slate-300 leading-relaxed font-light">
+                    ارتباط مستقیم با متدهای REST API کلیک‌آپ؛ جستجو در Spaceها، Folders و Lists و ثبت مستقیم وظایف با تخصیص به کاربران بدون کوچک‌ترین تاخیر.
+                </p>
+                <div class="mt-4 pt-3 border-t border-white/[0.06] flex items-center gap-2 text-[11px] text-purple-300 font-mono">
+                    <span>ClickUp API v2 • Webhooks</span>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="glass-panel p-7 rounded-3xl glow-card relative">
+                <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-2xl text-amber-400 mb-5">
+                    🔐
+                </div>
+                <h4 class="text-xl font-bold text-white mb-2">فایروال و امنیت دسترسی کاربری</h4>
+                <p class="text-xs text-slate-300 leading-relaxed font-light">
+                    مجهز به سیستم وایت‌لیست اختصاصی `ALLOWED_USER_IDS`؛ پاسخ‌دهی به ربات فقط برای تلگرام‌آیدی‌های مجاز باز است و دیگران به هیچ‌عنوان نمی‌توانند به اطلاعات یا API دسترسی پیدا کنند.
+                </p>
+                <div class="mt-4 pt-3 border-t border-white/[0.06] flex items-center gap-2 text-[11px] text-amber-300 font-mono">
+                    <span>Identity RBAC Guard</span>
+                </div>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="glass-panel p-7 rounded-3xl glow-card relative">
+                <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-2xl text-blue-400 mb-5">
+                    🐳
+                </div>
+                <h4 class="text-xl font-bold text-white mb-2">کانتینرسازی داکر و سرعت بالا</h4>
+                <p class="text-xs text-slate-300 leading-relaxed font-light">
+                    نوشته‌شده با معماری Asyncio و فریمورک Aiogram 3 بر پایه پایتون ۳.۱۲ همراه با Dockerfile آماده؛ قابلیت استقرار خودکار در هر سرور لینوکسی در کمتر از ۲ دقیقه.
+                </p>
+                <div class="mt-4 pt-3 border-t border-white/[0.06] flex items-center gap-2 text-[11px] text-blue-300 font-mono">
+                    <span>Dockerized • Aiogram 3</span>
+                </div>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="glass-panel p-7 rounded-3xl glow-card relative">
+                <div class="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-2xl text-rose-400 mb-5">
+                    🎙️
+                </div>
+                <h4 class="text-xl font-bold text-white mb-2">آماده برای صدا، فایل و اتوماسیون</h4>
+                <p class="text-xs text-slate-300 leading-relaxed font-light">
+                    ساختار ماژولار این پروژه امکان توسعه فوری برای پشتیبانی از پیام‌های صوتی (Voice-to-Task)، دریافت اسناد متنی و عکس برای تحلیل و اتصال به وب‌هوک‌های سازمانی را فراهم کرده است.
+                </p>
+                <div class="mt-4 pt-3 border-t border-white/[0.06] flex items-center gap-2 text-[11px] text-rose-300 font-mono">
+                    <span>Modular Tool Calling</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARCHITECTURE & WORKFLOW DIAGRAM -->
+    <section id="architecture" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/[0.07]">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-                <span class="text-xs font-mono uppercase tracking-wider text-purple-400 bg-purple-400/10 px-2.5 py-1 rounded-md border border-purple-400/20">Data Persistence</span>
-                <h3 class="text-3xl font-black text-white mt-2">امنیت اطلاعات و مدیریت پایگاه‌های داده</h3>
+                <span class="text-xs font-mono uppercase tracking-wider text-cyan-400 bg-cyan-400/10 px-3 py-1 rounded-md border border-cyan-400/30">Architecture</span>
+                <h3 class="text-3xl font-black text-white mt-3">جریان اجرای امن (Human-in-the-Loop Pipeline)</h3>
                 <p class="text-sm text-slate-300 mt-3 leading-relaxed font-light">
-                    تمامی داده‌های مالی، سفارش‌ها، سابقه پیام‌ها و لیدربورد کاربران با تفکیک و ایزولاسیون کامل دیتابیسی ذخیره شده‌اند و نسخه‌های پشتیبان ساختاریافته به صورت محلی و ریموت نگهداری می‌شوند.
+                    در فهام AI، هیچ کدی کورکورانه اقدام به نوشتن یا تغییر روی سیستم‌های سازمانی نمی‌کند. ساختار معماری به صورت ۴ لایه کاملاً مجزا تفکیک شده است:
                 </p>
 
-                <div class="mt-6 space-y-3">
-                    <div class="glass-panel p-3.5 rounded-xl flex items-center justify-between text-xs">
-                        <div class="flex items-center gap-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
-                            <span class="font-bold text-white">PostgreSQL 16 Engine</span>
+                <div class="mt-6 space-y-3.5">
+                    <div class="glass-panel p-4 rounded-2xl flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-sm flex-shrink-0 mt-0.5">۱</div>
+                        <div>
+                            <div class="text-sm font-bold text-white">دریافت و احراز هویت پیام</div>
+                            <div class="text-xs text-slate-400 mt-0.5 font-light">بررسی دسترسی فرستنده با شناسه تلگرامی ثبت‌شده در فایروال محلی.</div>
                         </div>
-                        <span class="code-font text-slate-400">distort_postgres_dump.sql</span>
                     </div>
-                    <div class="glass-panel p-3.5 rounded-xl flex items-center justify-between text-xs">
-                        <div class="flex items-center gap-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-                            <span class="font-bold text-white">Crypto Trading SQLite</span>
+
+                    <div class="glass-panel p-4 rounded-2xl flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm flex-shrink-0 mt-0.5">۲</div>
+                        <div>
+                            <div class="text-sm font-bold text-white">استنتاج مدل زبانی (OpenAI GPT)</div>
+                            <div class="text-xs text-slate-400 mt-0.5 font-light">تحلیل معنایی متن، خلاصه‌سازی و ایجاد Payload استاندارد برای ClickUp.</div>
                         </div>
-                        <span class="code-font text-slate-400">cryptobot/data/bot.db (76MB)</span>
                     </div>
-                    <div class="glass-panel p-3.5 rounded-xl flex items-center justify-between text-xs">
-                        <div class="flex items-center gap-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-pink-400"></span>
-                            <span class="font-bold text-white">Fati Members Database</span>
+
+                    <div class="glass-panel p-4 rounded-2xl flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm flex-shrink-0 mt-0.5">۳</div>
+                        <div>
+                            <div class="text-sm font-bold text-white">ارائه پیش‌نمایش و ثبت در حافظه تعلیق (Pending Action)</div>
+                            <div class="text-xs text-slate-400 mt-0.5 font-light">تولید توکن یکتا و نمایش دکمه‌های اینلاین تلگرام برای تایید یا رد درخواست.</div>
                         </div>
-                        <span class="code-font text-slate-400">fati/members.db</span>
                     </div>
-                    <div class="glass-panel p-3.5 rounded-xl flex items-center justify-between text-xs">
-                        <div class="flex items-center gap-3">
-                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-                            <span class="font-bold text-white">Group &amp; Dollar Game DBs</span>
+
+                    <div class="glass-panel p-4 rounded-2xl flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm flex-shrink-0 mt-0.5">۴</div>
+                        <div>
+                            <div class="text-sm font-bold text-white">ارسال قطعی به ClickUp REST API</div>
+                            <div class="text-xs text-slate-400 mt-0.5 font-light">تنها در صورت لمس دکمه تایید توسط کاربر، تسک با متد POST ایجاد و لینک آن ارسال می‌شود.</div>
                         </div>
-                        <span class="code-font text-slate-400">groupbot/bot.db &amp; dollar_bot.db</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Architecture Diagram Container -->
-            <div class="glass-panel p-6 rounded-3xl border border-white/10 relative">
-                <div class="text-xs font-mono text-cyan-400 mb-4 flex items-center justify-between">
-                    <span>SYSTEM ARCHITECTURE DIAGRAM</span>
-                    <span class="text-slate-500">v2.5 High-Availability</span>
+            <!-- Visual Flowchart -->
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 code-font text-xs">
+                <div class="flex items-center justify-between text-slate-400 mb-6 pb-3 border-b border-white/[0.07]">
+                    <span class="text-cyan-400 font-bold">PIPELINE EXECUTION FLOW</span>
+                    <span class="text-[11px] text-slate-500">Security Grade: High</span>
                 </div>
-                
-                <div class="space-y-4 text-xs code-font">
-                    <!-- Layer 1 -->
-                    <div class="p-3 bg-white/[0.03] border border-white/10 rounded-xl text-center">
-                        <div class="text-slate-400 text-[10px] uppercase">Client Ingress</div>
-                        <div class="text-white font-bold mt-1">Telegram MTProto &amp; HTTPS WebApp</div>
-                    </div>
-                    
-                    <div class="flex justify-center text-slate-500 text-xs">▼</div>
 
-                    <!-- Layer 2 -->
-                    <div class="p-3 bg-cyan-950/20 border border-cyan-500/20 rounded-xl text-center">
-                        <div class="text-cyan-400 text-[10px] uppercase">Reverse Proxy &amp; Gateway</div>
-                        <div class="text-white font-bold mt-1">Nginx 1.24 + SSL + Egress-Guard Tunnel</div>
+                <div class="space-y-4">
+                    <div class="p-3.5 bg-[#0f172f] border border-white/10 rounded-xl flex items-center justify-between">
+                        <span class="text-slate-200">User Telegram Message</span>
+                        <span class="text-cyan-400 text-[11px]">Async / Ingress</span>
                     </div>
 
-                    <div class="flex justify-center text-slate-500 text-xs">▼</div>
+                    <div class="flex justify-center text-slate-500">▼</div>
 
-                    <!-- Layer 3 -->
-                    <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
-                        <div class="p-2.5 bg-purple-950/20 border border-purple-500/20 rounded-lg text-purple-300 font-medium">
-                            Crypto Engine
+                    <div class="p-3.5 bg-cyan-950/20 border border-cyan-500/30 rounded-xl flex items-center justify-between">
+                        <span class="text-cyan-300 font-semibold">OpenAI Model Inference</span>
+                        <span class="text-slate-400 text-[11px]">GPT-5 / Structured JSON</span>
+                    </div>
+
+                    <div class="flex justify-center text-slate-500">▼</div>
+
+                    <div class="p-4 bg-amber-950/20 border border-amber-500/30 rounded-xl">
+                        <div class="flex items-center justify-between text-amber-300 font-bold mb-2">
+                            <span>Human Approval Gate</span>
+                            <span class="text-[10px] bg-amber-500/20 px-2 py-0.5 rounded">WAITING_USER</span>
                         </div>
-                        <div class="p-2.5 bg-emerald-950/20 border border-emerald-500/20 rounded-lg text-emerald-300 font-medium">
-                            Group &amp; Fati Bots
-                        </div>
-                        <div class="p-2.5 bg-blue-950/20 border border-blue-500/20 rounded-lg text-blue-300 font-medium">
-                            Node.js MiniApp
+                        <div class="text-[11px] text-slate-300 leading-normal">
+                            InlineKeyboardMarkup: [✅ Approve &amp; Create] | [❌ Cancel]
                         </div>
                     </div>
 
-                    <div class="flex justify-center text-slate-500 text-xs">▼</div>
+                    <div class="flex justify-center text-slate-500">▼ (Approved)</div>
 
-                    <!-- Layer 4 -->
-                    <div class="p-3 bg-emerald-950/20 border border-emerald-500/20 rounded-xl text-center">
-                        <div class="text-emerald-400 text-[10px] uppercase">Data Store &amp; Persistence</div>
-                        <div class="text-slate-200 font-semibold mt-1">PostgreSQL 16 (Relational) + Multi SQLite3 Engines</div>
+                    <div class="p-3.5 bg-emerald-950/20 border border-emerald-500/30 rounded-xl flex items-center justify-between">
+                        <span class="text-emerald-300 font-bold">ClickUp API Dispatch</span>
+                        <span class="text-emerald-400 text-[11px]">POST /api/v2/task</span>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMANDS & QUICK CONFIG -->
+    <section id="commands" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/[0.07]">
+        <div class="text-center mb-12">
+            <span class="text-xs font-mono uppercase tracking-wider text-emerald-400 bg-emerald-400/10 px-3 py-1 rounded-md border border-emerald-400/30">Configuration</span>
+            <h3 class="text-3xl font-black text-white mt-3">دستورات تلگرام و پیکربندی سریع</h3>
+            <p class="text-sm text-slate-400 mt-2 max-w-xl mx-auto">
+                دستورات داخلی بات برای تعامل مستقیم با فضاهای کاری ClickUp و تنظیم محیط
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <!-- Telegram Commands Table -->
+            <div class="glass-panel p-6 rounded-3xl">
+                <h4 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+                    <span class="text-cyan-400 font-mono">/</span>
+                    دستورات کنترلی در ربات تلگرام
+                </h4>
+                <div class="space-y-3 code-font text-xs">
+                    <div class="p-3 bg-white/[0.03] rounded-xl border border-white/[0.05] flex justify-between items-center">
+                        <span class="text-cyan-300 font-bold">/start</span>
+                        <span class="text-slate-400">بررسی دسترسی و خوش‌آمدگویی</span>
+                    </div>
+                    <div class="p-3 bg-white/[0.03] rounded-xl border border-white/[0.05] flex justify-between items-center">
+                        <span class="text-cyan-300 font-bold">/clickup</span>
+                        <span class="text-slate-400">تست ارتباط و دریافت Teams</span>
+                    </div>
+                    <div class="p-3 bg-white/[0.03] rounded-xl border border-white/[0.05] flex justify-between items-center">
+                        <span class="text-cyan-300 font-bold">/spaces</span>
+                        <span class="text-slate-400">نمایش Spaceهای فعال تیم</span>
+                    </div>
+                    <div class="p-3 bg-white/[0.03] rounded-xl border border-white/[0.05] flex justify-between items-center">
+                        <span class="text-cyan-300 font-bold">/lists &lt;space_id&gt;</span>
+                        <span class="text-slate-400">نمایش لیست‌های تسک در فضا</span>
+                    </div>
+                    <div class="p-3 bg-white/[0.03] rounded-xl border border-white/[0.05] flex justify-between items-center">
+                        <span class="text-cyan-300 font-bold">/task &lt;id&gt; | عنوان</span>
+                        <span class="text-slate-400">ساخت سریع با تاییدیه دکمه‌ای</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Environment Setup -->
+            <div class="glass-panel p-6 rounded-3xl">
+                <h4 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+                    <span class="text-purple-400 font-mono">.env</span>
+                    متغیرهای محیطی ضروری (.env)
+                </h4>
+                <div class="bg-[#050814] p-4 rounded-2xl border border-white/10 code-font text-xs text-slate-300 space-y-2 leading-relaxed">
+                    <div><span class="text-purple-400">TELEGRAM_BOT_TOKEN</span>=<span class="text-emerald-400">"8760...token"</span></div>
+                    <div><span class="text-purple-400">OPENAI_API_KEY</span>=<span class="text-emerald-400">"sk-proj-...key"</span></div>
+                    <div><span class="text-purple-400">CLICKUP_API_TOKEN</span>=<span class="text-emerald-400">"pk_...token"</span></div>
+                    <div><span class="text-purple-400">OPENAI_MODEL</span>=<span class="text-emerald-400">"gpt-5-mini"</span></div>
+                    <div><span class="text-purple-400">ALLOWED_USER_IDS</span>=<span class="text-emerald-400">"123456789,987654321"</span></div>
+                </div>
+                <div class="text-[11px] text-slate-400 mt-4 leading-normal font-light">
+                    فایل کانفیگ به صورت محلی و امن در مخزن خصوصی شما نگهداری می‌شود و هیچ کلید حساسی روی صفحه عمومی قرار ندارد.
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-white/[0.06] bg-[#020409] py-10 text-xs text-slate-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-                <span>© ۲۰۲۶ اکوسیستم ربات‌های هوشمند فهام (Faham AI Bots Ecosystem). کلیه حقوق محفوظ است.</span>
+    <footer class="border-t border-white/[0.06] bg-[#02040a] py-12 text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-6 h-6 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs">
+                    ف
+                </div>
+                <span>© ۲۰۲۶ ربات هوش مصنوعی فهام (Faham AI Autonomous Telegram Agent). تمامی حقوق محفوظ است.</span>
             </div>
-            <div class="flex items-center gap-4 text-slate-400">
-                <a href="https://github.com/Amirkingofcrypto/faham-ai-bot" target="_blank" class="hover:text-white transition">مخزن گیت‌هاب (Private)</a>
+            <div class="flex items-center gap-6 text-slate-400">
+                <a href="https://github.com/Amirkingofcrypto/faham-ai-bot" target="_blank" class="hover:text-cyan-300 transition flex items-center gap-1.5">
+                    <span>مخزن خصوصی سورس</span>
+                </a>
                 <span>•</span>
-                <span class="code-font">Miami Server #189573</span>
+                <a href="#simulator" class="hover:text-cyan-300 transition">تست شبیه‌ساز</a>
+                <span>•</span>
+                <span class="code-font text-slate-600">v2.5 Production</span>
             </div>
         </div>
     </footer>
 
-    <!-- Interactive Terminal Script & Filtering -->
+    <!-- Interactive Simulator JavaScript -->
     <script>
-        function filterBots(category) {
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => {
-                if (btn.getAttribute('data-filter') === category) {
-                    btn.classList.add('bg-white/10', 'text-white');
-                    btn.classList.remove('text-slate-400');
-                } else {
-                    btn.classList.remove('bg-white/10', 'text-white');
-                    btn.classList.add('text-slate-400');
-                }
-            });
+        const chatBox = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
 
-            const cards = document.querySelectorAll('.bot-card');
-            cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-cat') === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        const terminalOutput = document.getElementById('terminalBody');
-        const termInput = document.getElementById('termInput');
-
-        termInput.addEventListener('keydown', function(e) {
+        chatInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                handleTerminalInput();
+                handleUserMessage();
             }
         });
 
-        function handleTerminalInput() {
-            const val = termInput.value.trim().toLowerCase();
-            if (!val) return;
-            termInput.value = '';
-            runCommand(val);
+        const presetPrompts = {
+            1: "یک تسک برای طراحی مجدد لندینگ پیج فهام AI با اولویت High در لیست فرانت‌اند بساز.",
+            2: "تسک فوری: باگ درگاه پرداخت در پاسخ‌دهی به کال‌بک بانکی لاگ ارور ۵۰۰ میده، بررسی شود.",
+            3: "وضعیت تسک‌های اسپرینت جاری در فضای کاری Development رو برام گزارش کن."
+        };
+
+        function sendPreset(id) {
+            const text = presetPrompts[id];
+            chatInput.value = text;
+            handleUserMessage();
         }
 
-        function runCommand(cmd) {
-            let output = '';
-            const prompt = `<div class="text-emerald-400 mt-2">➜ root@3hcloud-miami:~# ${cmd}</div>`;
+        function handleUserMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            chatInput.value = '';
 
-            switch(cmd) {
-                case 'status':
-                    output = `
-                        <div class="text-slate-300 pl-4 space-y-1">
-                            <div>cryptobot.service          <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
-                            <div>cryptobot-tunnel.service   <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
-                            <div>fati.service               <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
-                            <div>dollarbot.service          <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
-                            <div>groupbot.service           <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
-                            <div>distort.service            <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
-                            <div>postgresql.service         <span class="text-emerald-400">[ACTIVE - RUNNING]</span></div>
+            // 1. Append User Message
+            appendUserMessage(text);
+
+            // 2. Append Typing Indicator
+            const typingId = appendTypingIndicator();
+
+            // 3. Simulate AI Reasoning & Response
+            setTimeout(() => {
+                removeElement(typingId);
+                processAiResponse(text);
+            }, 1200);
+        }
+
+        function appendUserMessage(text) {
+            const msgHtml = `
+                <div class="flex items-start justify-end gap-3">
+                    <div class="bg-gradient-to-r from-cyan-600 to-blue-600 rounded-2xl rounded-tl-none p-3.5 max-w-[85%] text-white text-xs shadow-md">
+                        ${escapeHtml(text)}
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-slate-700 flex-shrink-0 flex items-center justify-center text-xs font-bold text-white">
+                        شما
+                    </div>
+                </div>
+            `;
+            chatBox.insertAdjacentHTML('beforeend', msgHtml);
+            scrollChat();
+        }
+
+        function appendTypingIndicator() {
+            const id = 'typing_' + Date.now();
+            const typingHtml = `
+                <div id="${id}" class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-cyan-600/30 border border-cyan-500/30 flex-shrink-0 flex items-center justify-center text-xs text-cyan-300">
+                        🤖
+                    </div>
+                    <div class="bg-[#121c38] border border-white/[0.07] rounded-2xl rounded-tr-none px-4 py-3 text-xs text-slate-400 flex items-center gap-1.5">
+                        <span class="typing-dot w-2 h-2 rounded-full bg-cyan-400"></span>
+                        <span class="typing-dot w-2 h-2 rounded-full bg-cyan-400"></span>
+                        <span class="typing-dot w-2 h-2 rounded-full bg-cyan-400"></span>
+                        <span class="text-[11px] text-slate-500 mr-2">فهام AI در حال پردازش و تحلیل تسک...</span>
+                    </div>
+                </div>
+            `;
+            chatBox.insertAdjacentHTML('beforeend', typingHtml);
+            scrollChat();
+            return id;
+        }
+
+        function removeElement(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        function processAiResponse(userText) {
+            const token = Math.random().toString(36).substring(2, 9);
+            const isBug = userText.includes("باگ") || userText.includes("ارور");
+            const isReport = userText.includes("گزارش") || userText.includes("وضعیت");
+
+            let taskTitle = "تسک جدید فهام AI: " + userText.substring(0, 35) + "...";
+            let taskPriority = isBug ? "🚨 فوری (Urgent)" : "⚡ بالا (High)";
+            let taskList = isBug ? "Backend / Bug Reports" : "Frontend / Sprint 12";
+
+            if (isReport) {
+                const reportHtml = `
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-cyan-600/30 border border-cyan-500/30 flex-shrink-0 flex items-center justify-center text-xs text-cyan-300">
+                            🤖
                         </div>
-                    `;
-                    break;
-                case 'cryptobot':
-                    output = `
-                        <div class="text-cyan-300 pl-4 space-y-1">
-                            <div>• Strategy Engine: Multi-indicator RSI (14), EMA Cross (9, 21), Volume Delta</div>
-                            <div>• Signals: Auto-published to Private Trading Channel</div>
-                            <div>• Database Bot.db: 76.6 MB (Healthy, WAL enabled)</div>
-                            <div>• Last Cycle Check: 0.04s latency</div>
+                        <div class="bg-[#121c38] border border-white/[0.07] rounded-2xl rounded-tr-none p-4 max-w-[85%] text-slate-200 shadow-md">
+                            <div class="font-bold text-xs text-cyan-300 mb-2">📊 گزارش اسپرینت جاری ClickUp:</div>
+                            <div class="space-y-1.5 text-xs">
+                                <div>• تعداد تسک‌های باز: <span class="text-cyan-400 font-bold">۱۴ تسک</span></div>
+                                <div>• تسک‌های در حال انجام (In Progress): <span class="text-amber-400 font-bold">۵ تسک</span></div>
+                                <div>• تسک‌های تکمیل‌شده این هفته: <span class="text-emerald-400 font-bold">۱۹ تسک</span></div>
+                            </div>
+                            <div class="mt-3 text-[11px] text-slate-400 bg-white/[0.03] p-2 rounded-lg border border-white/[0.05]">
+                                همه تسک‌ها در فضای کاری Development سینک هستند.
+                            </div>
                         </div>
-                    `;
-                    break;
-                case 'databases':
-                    output = `
-                        <div class="text-purple-300 pl-4 space-y-1">
-                            <div>1. distort (PostgreSQL 16) -> Port 5432 [Dump: distort_postgres_dump.sql]</div>
-                            <div>2. /root/cryptobot/cryptobot/data/bot.db (SQLite3) [76 MB]</div>
-                            <div>3. /root/fati/members.db (SQLite3) [180 KB]</div>
-                            <div>4. /root/groupbot/bot.db (SQLite3) [1.7 MB]</div>
-                            <div>5. /root/ollargame/dollar_bot.db (SQLite3) [82 KB]</div>
-                        </div>
-                    `;
-                    break;
-                case 'bots':
-                    output = `
-                        <div class="text-slate-300 pl-4">
-                            Active Units: [cryptobot, fati, groupbot, dollarbot, distort, telegram_ai_bot, coinbot, mybot]
-                        </div>
-                    `;
-                    break;
-                case 'help':
-                    output = `
-                        <div class="text-amber-300 pl-4 space-y-1">
-                            <div>Available commands:</div>
-                            <div>- status      : Display systemctl state of all 7 bots</div>
-                            <div>- cryptobot   : Detailed crypto bot health and telemetry</div>
-                            <div>- databases   : List all active SQL databases & sizes</div>
-                            <div>- bots        : Quick list of registered bot units</div>
-                            <div>- clear       : Clear terminal window</div>
-                        </div>
-                    `;
-                    break;
-                case 'clear':
-                    terminalOutput.innerHTML = '<div class="text-slate-500"># Console cleared. Type "help" or select a preset above.</div>';
-                    return;
-                default:
-                    output = `<div class="text-rose-400 pl-4">bash: command not found: ${cmd}. Type "help" for a list of commands.</div>`;
+                    </div>
+                `;
+                chatBox.insertAdjacentHTML('beforeend', reportHtml);
+                scrollChat();
+                return;
             }
 
-            terminalOutput.innerHTML += prompt + output;
-            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            const responseHtml = `
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-cyan-600/30 border border-cyan-500/30 flex-shrink-0 flex items-center justify-center text-xs text-cyan-300">
+                        🤖
+                    </div>
+                    <div class="bg-[#121c38] border border-white/[0.07] rounded-2xl rounded-tr-none p-4 max-w-[85%] text-slate-200 shadow-md space-y-3">
+                        <div>
+                            <div class="font-bold text-xs text-cyan-300 mb-1">پیش‌نویس تسک ساخته‌شده توسط هوش مصنوعی:</div>
+                            <div class="text-xs text-slate-300 font-light">درخواست شما بررسی شد. آیا مایلید این تسک در کلیک‌آپ ساخته شود؟</div>
+                        </div>
+
+                        <!-- Card Preview inside Telegram -->
+                        <div class="bg-[#0b1226] border border-cyan-500/20 rounded-xl p-3 text-xs space-y-1.5 code-font">
+                            <div class="text-white font-bold">${escapeHtml(taskTitle)}</div>
+                            <div class="text-slate-400 flex justify-between">
+                                <span>Priority:</span> <span class="text-rose-400 font-semibold">${taskPriority}</span>
+                            </div>
+                            <div class="text-slate-400 flex justify-between">
+                                <span>Target List:</span> <span class="text-cyan-300">${taskList}</span>
+                            </div>
+                            <div class="text-slate-400 flex justify-between">
+                                <span>Assignee:</span> <span class="text-slate-300">@AMIR (Lead)</span>
+                            </div>
+                        </div>
+
+                        <!-- Human-In-The-Loop Approval Buttons -->
+                        <div id="action_${token}" class="flex items-center gap-2 pt-1">
+                            <button onclick="approveTask('${token}', '${escapeHtml(taskTitle)}', '${taskList}')" class="flex-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5">
+                                <span>✅ تأیید و اجرا</span>
+                            </button>
+                            <button onclick="rejectTask('${token}')" class="flex-1 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/40 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5">
+                                <span>❌ لغو</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            chatBox.insertAdjacentHTML('beforeend', responseHtml);
+            scrollChat();
+        }
+
+        function approveTask(token, title, listName) {
+            const actionContainer = document.getElementById(`action_${token}`);
+            if (actionContainer) {
+                actionContainer.innerHTML = `
+                    <div class="w-full bg-emerald-950/40 border border-emerald-500/40 p-2.5 rounded-xl text-emerald-300 text-xs flex items-center justify-between">
+                        <div class="flex items-center gap-1.5 font-medium">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span>تسک با شناسه <code class="font-mono text-white">#CU-${token.toUpperCase()}</code> در ClickUp ساخته شد!</span>
+                        </div>
+                        <a href="https://app.clickup.com" target="_blank" class="text-[11px] underline text-cyan-300">مشاهده در بورد</a>
+                    </div>
+                `;
+            }
+            scrollChat();
+        }
+
+        function rejectTask(token) {
+            const actionContainer = document.getElementById(`action_${token}`);
+            if (actionContainer) {
+                actionContainer.innerHTML = `
+                    <div class="w-full bg-rose-950/30 border border-rose-500/30 p-2.5 rounded-xl text-rose-300 text-xs flex items-center gap-1.5">
+                        <span>❌ اقدام لغو گردید و هیچ دیتایی ارسال نشد.</span>
+                    </div>
+                `;
+            }
+            scrollChat();
+        }
+
+        function resetChat() {
+            chatBox.innerHTML = `
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-cyan-600/30 border border-cyan-500/30 flex-shrink-0 flex items-center justify-center text-xs text-cyan-300">
+                        🤖
+                    </div>
+                    <div class="bg-[#121c38] border border-white/[0.07] rounded-2xl rounded-tr-none p-4 max-w-[85%] text-slate-200 shadow-md">
+                        <div class="font-bold text-xs text-cyan-300 mb-1">فهام AI</div>
+                        مکالمه پاکسازی شد! هر تسک، یادداشت یا دستوری دارید بنویسید تا پردازش کنم. ✨
+                    </div>
+                </div>
+            `;
+        }
+
+        function scrollChat() {
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
         }
     </script>
 </body>
